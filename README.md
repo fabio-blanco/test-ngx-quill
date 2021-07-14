@@ -1,27 +1,99 @@
-# TestNgxQuill
+# Angular + ngx-quill sample project #
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
+This project is a simple Sample on how to use Quill editor in an Angular app.
 
-## Development server
+## About Angular ##
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Angular is a web front-end framework lead by the Angular team from Google.
 
-## Code scaffolding
+See [https://angular.io/](https://angular.io/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## About Quill ##
 
-## Build
+[Quill](https://quilljs.com/) is a free, open source WYSIWYG editor built for the modern 
+web. It is not an Angular module so, in order to use it in Angular apps, there is a 
+wrapper module called ngx-quill.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## About ngx-quill ##
 
-## Running unit tests
+[Ngx-quill](https://github.com/KillerCodeMonkey/ngx-quill) is an angular (>=2) module 
+for the Quill Rich Text Editor containing all components to use it.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## How To ##
 
-## Running end-to-end tests
+In order to use PrimeNG the first thing is to create an Angular project (workspace). You can do it on
+the terminal using [Angular Cli](https://angular.io/guide/setup-local#install-the-angular-cli) or you
+can use some IDE utility for this purpose. I like to use the Intellij IDEA Angular Cli utility, but it
+is just a UI wrapper over the Angular Cli tool itself.
+To do this with Angular Cli, just type something like this in a terminal:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```shell
+ng new your-app-name
+```
 
-## Further help
+Then, inside the project directory, run those commands to install ngx-quill:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```shell
+npm install ngx-quill
+npm install --save-dev @types/quill@1.3.10
+```
+
+When we install ngx-quill, it will automatically install Quill and, in the moment that
+I'm writing this, the Quill last version is 1.3.7, so we enforce the @types/quill to the
+1.x versions in order to avoid compatibility errors.
+
+Then add the styles from quill to the proper place on the `angular.json` file:
+
+```json
+"styles": [
+  "node_modules/quill/dist/quill.core.css",
+  "node_modules/quill/dist/quill.snow.css",
+  "src/styles.css"
+]
+```
+
+To be able to use the ngx-quill, import it on the main module of the app:
+
+```typescript
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    QuillModule.forRoot()
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Then to use it is as simple as:
+
+```html
+<quill-editor [(ngModel)]="text" ></quill-editor>
+```
+
+Where text is a `string` component field that will hold the html generated from the quill
+editor.
+
+The underlying quill instance cam be obtained through the `onEditorCreated` event handler:
+
+```typescript
+quillEditor: Quill;
+
+onEditorCreated(editor: Quill): void {
+  this.quillEditor = editor;
+}
+```
+
+```html
+<quill-editor [(ngModel)]="text" (onEditorCreated)="onEditorCreated($event)"></quill-editor>
+```
+
+## Copyright and license ##
+
+Code and documentation copyright 2021 Fabio M. Blanco. Code released under the
+[MIT License](https://github.com/fabio-blanco/test-ngx-quill/blob/master/LICENSE)
