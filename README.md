@@ -34,6 +34,7 @@ ng new your-app-name
 Then, inside the project directory, run those commands to install ngx-quill:
 
 ```shell
+npm install quill
 npm install ngx-quill
 npm install --save-dev @types/quill@1.3.10
 ```

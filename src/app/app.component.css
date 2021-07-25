@@ -16,9 +16,34 @@
   }
 }
 
-.display-box {
-  border: 1px solid black;
-  box-shadow: 2px 2px;
-  margin: 1rem;
-  padding: 0.75rem;
+.active {
+  color: brown;
+}
+
+.menu a{
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.menu ul {
+  list-style-type: none;
+  display: flex;
+  border: 1px solid #f2f7fc;
+  padding: 0;
+  box-shadow: 2px 2px #d8ebfd;
+}
+
+.menu li {
+  display: inline-block;
+  background-color: aliceblue;
+  border-right: 1px solid white;
+}
+
+.menu li:last-child {
+  border-right: none;
+}
+
+.menu li:hover {
+  background-color: #daeaf8;
 }

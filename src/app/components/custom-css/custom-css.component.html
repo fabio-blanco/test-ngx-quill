@@ -1,0 +1,19 @@
+<div>
+
+  <h2>Customized Quill Template CSS</h2>
+
+  <app-custom-editor [(text)]="text"></app-custom-editor>
+
+  <div class="display-box">
+    <h3>Edited text</h3>
+    {{text}}
+  </div>
+
+  <div class="display-box">
+    <h3>Edited html - (Using quill view)</h3>
+    <quill-view [sanitize]="true" [content]="text"></quill-view>
+  </div>
+
+  <app-custom-view [text]="text"></app-custom-view>
+
+</div>

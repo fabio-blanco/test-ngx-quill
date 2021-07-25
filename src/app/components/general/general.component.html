@@ -1,0 +1,42 @@
+<div>
+
+  <h2>General use</h2>
+
+  <quill-editor [(ngModel)]="text" [sanitize]="true" (onEditorCreated)="onEditorCreated($event)"></quill-editor>
+
+  <div class="display-box">
+    <h3>Edited text</h3>
+    {{text}}
+  </div>
+
+
+  <div class="display-box">
+    <h3>Edited html</h3>
+    <div [innerHTML]="text"></div>
+  </div>
+
+  <div class="display-box">
+    <h3>Edited html - (Using quill view)</h3>
+    <quill-view [sanitize]="true" [content]="text"></quill-view>
+  </div>
+
+  <div class="display-box">
+    <h3>Edited text - (Using quill view)</h3>
+    <quill-view [sanitize]="true" [content]="text" format="text"></quill-view>
+  </div>
+
+  <button type="button" (click)="displayUnformattedText()">Display unformatted text</button>
+
+  <div class="display-box">
+    <h3>Edited unformatted text</h3>
+    <ng-container *ngIf="unformattedText">
+      {{unformattedText}}
+      <p>Com &lt;pre&gt;:</p>
+      <pre>
+        {{unformattedText}}
+      </pre>
+    </ng-container>
+  </div>
+
+
+</div>
